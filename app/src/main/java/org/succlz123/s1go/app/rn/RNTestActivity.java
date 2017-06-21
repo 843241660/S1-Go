@@ -1,9 +1,12 @@
 package org.succlz123.s1go.app.rn;
 
 import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactPackage;
 
 import android.content.Context;
 import android.content.Intent;
+
+import java.util.List;
 
 /**
  * Created by succlz123 on 2017/2/26.

@@ -10,6 +10,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 15
         versionName "1.1.2"
+        multiDexEnabled true
 
         buildConfigField 'String', 'AUTH', '\"auth\"'
         buildConfigField 'String', 'SALT_KEY', '\"saltkey\"'
@@ -64,8 +65,6 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${rootProject.ext.androidSupportLibraryVersion}"
     compile "com.android.support:design:${rootProject.ext.androidSupportLibraryVersion}"
 
-    compile "com.google.code.gson:gson:${rootProject.ext.gsonVersion}"
-
     debugCompile 'com.facebook.stetho:stetho:1.5.0'
     debugCompile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
@@ -90,7 +89,9 @@ dependencies {
 
     compile "com.bilibili:magicasakura:${rootProject.ext.magicasakuraVersion}@aar"
 
-    compile "com.facebook.react:react-native:+" // From node_modules.
+    compile("com.facebook.react:react-native:+") {
+        exclude group: 'com.facebook.stetho', module: 'stetho'
+    }
 
 //    compile 'com.frostwire:jlibtorrent:1.2.0.1'
 //    compile 'com.frostwire:jlibtorrent-android-arm:1.2.0.1'
