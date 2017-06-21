@@ -6,6 +6,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import org.succlz123.s1go.app.MainApplication;
 import org.succlz123.s1go.app.R;
 import org.succlz123.s1go.app.bean.UserInfo;
+import org.succlz123.s1go.app.rn.RNTestActivity;
 import org.succlz123.s1go.app.ui.blackList.BlackListActivity;
 import org.succlz123.s1go.app.ui.login.LoginActivity;
 import org.succlz123.s1go.app.utils.PicHelper;
@@ -132,6 +133,8 @@ public class MyRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 public void onClick(View view) {
                     if (position == 4) {
                         BlackListActivity.start(view.getContext());
+                    } else if (position == 1) {
+                        RNTestActivity.start(view.getContext());
                     } else {
                         ToastUtils.showToastShort(view.getContext(), "额,有空再说.");
                     }

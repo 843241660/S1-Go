@@ -2,6 +2,11 @@ package org.succlz123.s1go.app;
 
 import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.react.ReactPackage;
+import com.facebook.react.shell.MainReactPackage;
+import com.facebook.soloader.SoLoader;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -27,6 +32,7 @@ import android.support.annotation.ColorRes;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -38,7 +44,8 @@ import rx.schedulers.Schedulers;
 /**
  * Created by succlz123 on 2015/4/13.
  */
-public class MainApplication extends Application implements ThemeUtils.switchColor {
+public class MainApplication extends Application implements ThemeUtils.switchColor, ReactApplication {
+
     public UserInfo.Variables loginInfo;
     public RefWatcher refWatcher;
 
@@ -67,6 +74,11 @@ public class MainApplication extends Application implements ThemeUtils.switchCol
         Fresco.initialize(this);
         ImageLoader.init();
         ThemeUtils.setSwitchColor(this);
+
+        if (BuildConfig.DEBUG) {
+            BuildConfig.STETHO.init(this);
+        }
+        SoLoader.init(this, /* native exopackage */ false);
 
         Observable.fromCallable(new Callable<UserInfo.Variables>() {
             @Override
@@ -162,6 +174,25 @@ public class MainApplication extends Application implements ThemeUtils.switchCol
         String auth = BuildConfig.AUTH + "=" + Uri.encode(userInfo.auth);
         String saltKey = BuildConfig.SALT_KEY + "=" + userInfo.saltkey;
         return cookie + auth + ";" + cookie + saltKey + ";";
+    }
+
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+        @Override
+        public boolean getUseDeveloperSupport() {
+            return BuildConfig.DEBUG;
+        }
+
+        @Override
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                    new MainReactPackage()
+            );
+        }
+    };
+
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
     }
 
     private static class MainActivityLifecycleCallback implements ActivityLifecycleCallbacks {

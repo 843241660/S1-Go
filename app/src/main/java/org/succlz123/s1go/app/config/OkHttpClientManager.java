@@ -1,5 +1,7 @@
 package org.succlz123.s1go.app.config;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import org.succlz123.s1go.app.MainApplication;
 
 import android.content.Context;
@@ -34,6 +36,7 @@ public class OkHttpClientManager {
 
             okHttpClientBuilder.addNetworkInterceptor(new AddCookiesInterceptor(context));
             okHttpClientBuilder.addNetworkInterceptor(new ReceivedCookiesInterceptor(context));
+            okHttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
             okHttpClient = okHttpClientBuilder.build();
         }
     }

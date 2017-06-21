@@ -1,0 +1,24 @@
+{
+  "name": "s1-go",
+  "version": "1.0.0",
+  "description": "S1论坛 Android 5.0+ 客户端",
+  "main": "index.js",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output app/src/main/assets/index.android.bundle --sourcemap-output app/src/main/assets/index.android.map --assets-dest android/app/src/main/res/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/succlz123/S1-Go.git"
+  },
+  "author": "succlz123",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/succlz123/S1-Go/issues"
+  },
+  "homepage": "https://github.com/succlz123/S1-Go#readme",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-native": "^0.41.2"
+  }
+}
